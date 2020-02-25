@@ -11,6 +11,7 @@ class Account
   def deposit(amount)
     raise 'Deposit amount must be a number' unless amount.is_a? Numeric
     raise 'Deposit must be a positive number' if amount <= 0
+
     make_deposit(amount)
     update_deposit_log(amount)
   end
@@ -18,7 +19,9 @@ class Account
   def withdraw(amount)
     raise 'Withdraw amount must be a number' unless amount.is_a? Numeric
     raise 'Withdraw must be a positive number' if amount <= 0
+    
     make_withdraw(amount)
+    update_withdraw_log(amount)
   end
 
   private
@@ -32,6 +35,10 @@ class Account
 
   def update_deposit_log(amount)
     @statement << "#{Time.now.strftime("%d/%m/%Y")} || #{amount} || || #{@balance}"
+  end
+
+  def update_withdraw_log(amount)
+    @statement << "#{Time.now.strftime("%d/%m/%Y")} || || #{amount} || #{@balance}"
   end
   
 end
