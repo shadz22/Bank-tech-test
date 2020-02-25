@@ -6,4 +6,8 @@ class Account
     @balance = 0
     @statement =[]
   end
+
+  def deposit(amount)
+    @balance += amount
+  end
 end
