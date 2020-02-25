@@ -25,4 +25,14 @@ describe Account do
       expect { subject.deposit(-1)}.to raise_error "Deposit must be a positive number"
     end
   end
+
+  it {is_expected.to respond_to(:withdraw).with(1).argument }
+
+  describe '#withdraw' do
+    it 'decreases the balance by the amount withdrawn' do
+      subject.deposit(100)
+      subject.withdraw(30)
+      expect(subject.balance).to eq 70
+    end
+  end
 end
