@@ -12,6 +12,7 @@ class Account
     raise 'Deposit amount must be a number' unless amount.is_a? Numeric
     raise 'Deposit must be a positive number' if amount <= 0
     make_deposit(amount)
+    update_deposit_log(amount)
   end
 
   def withdraw(amount)
@@ -27,6 +28,10 @@ class Account
 
   def make_withdraw(amount)
     @balance -= amount
+  end
+
+  def update_deposit_log(amount)
+    @statement << "#{Time.now.strftime("%d/%m/%Y")} || #{amount} || || #{@balance}"
   end
   
 end
