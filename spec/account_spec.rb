@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'account.rb'
 
 describe Account do
@@ -9,7 +11,7 @@ describe Account do
     expect(subject.statement).to be_an_instance_of(Array)
   end
 
-  it {is_expected.to respond_to(:deposit).with(1).argument }
+  it { is_expected.to respond_to(:deposit).with(1).argument }
 
   describe '#deposit' do
     it 'increases the balance by the amount deposited' do
@@ -18,15 +20,15 @@ describe Account do
     end
 
     it 'raise an error if deposit amount is not a number' do
-      expect { subject.deposit('abcd')}.to raise_error "Deposit amount must be a number" 
+      expect { subject.deposit('abcd') }.to raise_error 'Deposit amount must be a number'
     end
-    
+
     it 'raises an error if the amount is less than the minimum required deposit amount' do
-      expect { subject.deposit(-1)}.to raise_error "Deposit must be a positive number"
+      expect { subject.deposit(-1) }.to raise_error 'Deposit must be a positive number'
     end
   end
 
-  it {is_expected.to respond_to(:withdraw).with(1).argument }
+  it { is_expected.to respond_to(:withdraw).with(1).argument }
 
   describe '#withdraw' do
     it 'decreases the balance by the amount withdrawn' do
@@ -36,11 +38,11 @@ describe Account do
     end
 
     it 'raise an error if withdraw amount is not a number' do
-      expect { subject.withdraw('abcd')}.to raise_error "Withdraw amount must be a number" 
+      expect { subject.withdraw('abcd') }.to raise_error 'Withdraw amount must be a number'
     end
-    
+
     it 'raises an error if the amount is a negative number' do
-      expect { subject.withdraw(-1)}.to raise_error "Withdraw must be a positive number"
+      expect { subject.withdraw(-1) }.to raise_error 'Withdraw must be a positive number'
     end
   end
 end

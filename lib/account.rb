@@ -1,22 +1,24 @@
-class Account
+# frozen_string_literal: true
 
+class Account
   attr_reader :balance, :statement
 
   def initialize
     @balance = 0
-    @statement =[]
+    @statement = []
   end
 
   def deposit(amount)
-    fail "Deposit amount must be a number" unless amount.is_a? Numeric
-    fail "Deposit must be a positive number" if amount < 0
+    raise 'Deposit amount must be a number' unless amount.is_a? Numeric
+    raise 'Deposit must be a positive number' if amount <= 0
+
     @balance += amount
   end
 
   def withdraw(amount)
-    fail "Withdraw amount must be a number" unless amount.is_a? Numeric
-    fail "Withdraw must be a positive number" if amount < 0
+    raise 'Withdraw amount must be a number' unless amount.is_a? Numeric
+    raise 'Withdraw must be a positive number' if amount <= 0
+
     @balance -= amount
   end
-
 end
