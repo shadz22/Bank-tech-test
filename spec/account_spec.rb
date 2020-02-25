@@ -34,5 +34,13 @@ describe Account do
       subject.withdraw(30)
       expect(subject.balance).to eq 70
     end
+
+    it 'raise an error if withdraw amount is not a number' do
+      expect { subject.withdraw('abcd')}.to raise_error "Withdraw amount must be a number" 
+    end
+    
+    it 'raises an error if the amount is a negative number' do
+      expect { subject.withdraw(-1)}.to raise_error "Withdraw must be a positive number"
+    end
   end
 end

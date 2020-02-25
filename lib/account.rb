@@ -14,6 +14,8 @@ class Account
   end
 
   def withdraw(amount)
+    fail "Withdraw amount must be a number" unless amount.is_a? Numeric
+    fail "Withdraw must be a positive number" if amount < 0
     @balance -= amount
   end
 
