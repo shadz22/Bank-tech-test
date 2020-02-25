@@ -16,6 +16,13 @@ describe Account do
       subject.deposit(10)
       expect(subject.balance).to eq 10
     end
-  end
 
+    it 'raise an error if deposit amount is not a number' do
+      expect { subject.deposit('abcd')}.to raise_error "Deposit amount must be a number" 
+    end
+    
+    it 'raises an error if the amount is less than the minimum required deposit amount' do
+      expect { subject.deposit(-1)}.to raise_error "Deposit must be a positive number"
+    end
+  end
 end
