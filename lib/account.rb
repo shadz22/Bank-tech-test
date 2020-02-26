@@ -1,11 +1,13 @@
 # frozen_string_literal: true
+require_relative 'printer'
 
 class Account
   attr_reader :balance, :statement
 
-  def initialize
+  def initialize(printer = Printer.new)
     @balance = 0
     @statement = []
+    @printer = printer
   end
 
   def deposit(amount)
@@ -19,9 +21,13 @@ class Account
   def withdraw(amount)
     raise 'Withdraw amount must be a number' unless amount.is_a? Numeric
     raise 'Withdraw must be a positive number' if amount <= 0
-    
+
     make_withdraw(amount)
     update_withdraw_log(amount)
+  end
+
+  def print_statement
+    @printer.print_transactions(@statement)
   end
 
   private

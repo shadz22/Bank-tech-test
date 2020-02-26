@@ -3,6 +3,9 @@
 require 'account.rb'
 
 describe Account do
+  subject { described_class.new }
+  let(:time) {Time.now.strftime("%d/%m/%Y")}
+
   it 'has a balance of 0 at initiation' do
     expect(subject.balance).to eq 0
   end
@@ -43,6 +46,13 @@ describe Account do
 
     it 'raises an error if the amount is a negative number' do
       expect { subject.withdraw(-1) }.to raise_error 'Withdraw must be a positive number'
+    end
+  end
+
+  describe '#print_statement' do
+    it 'prints the transactions after making a deposit' do
+      subject.deposit(50)
+      expect(subject.print_statement).to eq "date || credit || debit || balance\n#{time} || 50 || || 50"
     end
   end
 end
