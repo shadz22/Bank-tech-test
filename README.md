@@ -42,8 +42,8 @@ account.print_statement
 The command above should show you the following. The date will be different 
 ```
 date || credit || debit || balance
-24/02/2020 || || 500.00 || 2500.00
-13/02/2020 || 2000.00 || || 3000.00
-10/01/2020 || 1000.00 || || 1000.00
+26/02/2020 || || 500.00 || 2500.00
+26/02/2020 || 2000.00 || || 3000.00
+26/02/2020 || 1000.00 || || 1000.00
 ```
 

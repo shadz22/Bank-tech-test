@@ -1,8 +1,9 @@
 # frozen_string_literal: true
+
 require_relative 'printer'
 
 class Account
-  attr_reader :balance, :statement
+  attr_reader :balance, :statement, :printer, :transaction
 
   def initialize(printer = Printer.new)
     @balance = 0
@@ -27,10 +28,11 @@ class Account
   end
 
   def print_statement
-    @printer.print_transactions(@statement)
+    printer.print_transactions(statement)
   end
 
   private
+
   def make_deposit(amount)
     @balance += amount
   end
@@ -40,11 +42,22 @@ class Account
   end
 
   def update_deposit_log(amount)
-    @statement << "#{Time.now.strftime("%d/%m/%Y")} || #{amount} || || #{@balance}"
+    transaction = {
+      time: Time.now.strftime('%d/%m/%Y'),
+      credit: (format '%.2f', amount),
+      debit: nil,
+      balance: (format '%.2f', @balance)
+    }
+    @statement << transaction
   end
 
   def update_withdraw_log(amount)
-    @statement << "#{Time.now.strftime("%d/%m/%Y")} || || #{amount} || #{@balance}"
+    transaction = {
+      time: Time.now.strftime('%d/%m/%Y'),
+      credit: nil,
+      debit: (format '%.2f', amount),
+      balance: (format '%.2f', @balance)
+    }
+    @statement << transaction
   end
-  
 end

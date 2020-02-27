@@ -1,17 +1,16 @@
 # frozen_string_literal: true
+
 require_relative 'account'
 
 class Printer
-
   def print_transactions(statement)
-    print_header
-    statement.reverse_each.map do |trans| 
-      puts trans
+    print_format = ['date || credit || debit || balance']
+    statement.reverse_each.map do |transaction|
+      individual_transaction = "#{transaction[:time]} ||"\
+      "  #{transaction[:credit]} || #{transaction[:debit]}"\
+      " || #{transaction[:balance]}"
+      print_format.push(individual_transaction)
     end
-  end
-
-  private
-  def print_header
-    puts 'date || credit || debit || balance'
+    puts print_format
   end
 end
